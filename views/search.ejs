@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <title>Search: <%= search %></title>
+    </head>
+    <body>
+        <header>
+            <h1><a href="/">Moviepit</a></h1>
+            <form action="/search" method="get">
+                <input type="text" name="search" id="">
+                <input type="submit" value="Search" id="">
+            </form>
+
+            <section>
+            <a href="/category/action">Action</a>
+            <a href="/category/action">Crime</a>
+            <a href="/category/action">Comedy</a>
+            <a href="/category/action">Drama</a>
+            <a href="/category/action">Horror</a>
+            <a href="/category/action">Music</a>
+            </section>
+        </header>
+        <h2>Movie results for: <%= search %></h2>
+
+
+        <% movies.forEach(element => { %>
+            <h3><a href=<%=`/detail/${element.id}`%>><%= element.title %></a></h3>
+            <% if (element.title != element.original_title) { %>
+             <h4><a href=<%=`/detail/${element.id}`%>><%= `(${element.original_title})` %></a></h4>
+            <% } %>
+            <p><%= element.overview %></p>
+            <img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>>
+        <% }) %>
+    </body>
+</html>

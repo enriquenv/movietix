@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+        <title><%= detail.title %> | Moviepit</title>
+    </head>
+    <body>
+        <header>
+            <h1><a href="/">Moviepit</a></h1>
+            <form action="/search" method="get">
+                <input type="text" name="search" id="" />
+                <input type="submit" value="Search" id="" />
+            </form>
+
+            <section>
+                <a href="/category/action">Action</a>
+                <a href="/category/action">Crime</a>
+                <a href="/category/action">Comedy</a>
+                <a href="/category/action">Drama</a>
+                <a href="/category/action">Horror</a>
+                <a href="/category/action">Music</a>
+            </section>
+        </header>
+
+        <img src=<%-`//image.tmdb.org/t/p/w1280/${detail.backdrop_path}`%>
+        alt=<%= detail.original_title %>>
+        <h2><%= detail.title %></h2>
+        <p><%= detail.release_date %></p>
+        Released <% detail.genres.forEach(element => { %>
+        <p><%= element.name %></p>
+        <% }) %>
+
+        <h3>PLOT SUMMARY</h3>
+        <p><%= detail.overview %></p>
+
+        <h4>Votes</h4>
+        <p><%= detail.vote_average %>/10</p>
+        <p><%= detail.vote_count %></p>
+    </body>
+</html>
