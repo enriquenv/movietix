@@ -1,4 +1,52 @@
+body {
+    background-color: #101010;
+    color:lightgrey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
 header,
-h2 {
+h2, #pagination, .movie-instance {
     text-align: center;
+}
+
+h4 {
+    margin-top: -16px;
+}
+
+.movie-instance {
+    text-align: center;
+    background-color: #1c1c1c;
+    border-radius: 50px;
+    margin: 10px;
+    padding: 10px;
+    width: 700px;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.detail-instance {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+.detail-image {
+    max-width: 80vw;
+}
+
+button {
+    background-color: #101010;
+}
+
+.active-button {
+    background-color: #37a45e;
 }

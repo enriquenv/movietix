@@ -24,8 +24,8 @@
                 <a href="/category/action">Music</a>
             </section>
         </header>
-
-        <img src=<%-`//image.tmdb.org/t/p/w1280/${detail.backdrop_path}`%>
+        <article class="detail-instance">
+        <img class="detail-image" src=<%-`//image.tmdb.org/t/p/w1280/${detail.backdrop_path}`%>
         alt=<%= detail.original_title %>>
         <h2><%= detail.title %></h2>
         <p><%= detail.release_date %></p>
@@ -39,5 +39,6 @@
         <h4>Votes</h4>
         <p><%= detail.vote_average %>/10</p>
         <p><%= detail.vote_count %></p>
+        </article>
     </body>
 </html>

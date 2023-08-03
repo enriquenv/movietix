@@ -17,36 +17,40 @@
 
             <section>
             <a href="/category/action">Action</a>
-            <a href="/category/action">Crime</a>
-            <a href="/category/action">Comedy</a>
-            <a href="/category/action">Drama</a>
-            <a href="/category/action">Horror</a>
-            <a href="/category/action">Music</a>
+            <a href="/category/crime">Crime</a>
+            <a href="/category/comedy">Comedy</a>
+            <a href="/category/drama">Drama</a>
+            <a href="/category/horror">Horror</a>
+            <a href="/category/music">Music</a>
             </section>
         </header>
 
         <h2>This is page <%= page %></h2>
 
+        <section>
         <% movies.forEach(element => { %>
+            <article class="movie-instance">
             <h3><a href=<%=`/detail/${element.id}`%>><%= element.title %></a></h3>
             <% if (element.title != element.original_title) { %>
              <h4><a href=<%=`/detail/${element.id}`%>><%= `(${element.original_title})` %></a></h4>
             <% } %>
             <p><%= element.overview %></p>
-            <img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>>
+            <a href=<%=`/detail/${element.id}`%>><img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>></a>
+            </article>
         <% }) %>
+        </section>
 
-<div>
+<div id="pagination">
         <% if (page <= 996 && page >= 4) { %>
             <% for( let index = page - 4; index < page + 5; index++ ) { %>
-                <button>
+                <button class="<%= index === page ? 'active-button' : '' %>">
                 <a href=<%= `/all/${index}` %> ><%= index %></a>
                 </button>
             <% } %>
         
         <% } else if (page <= 4 && page > 0) { %>
             <% for( let index = 1; index < 10; index++ ) { %>
-                <button>
+                <button class="<%= index === page ? 'active-button' : '' %>">
                 <a href=<%= `/all/${index}` %> ><%= index %></a>
                 </button>
             <% } %>
