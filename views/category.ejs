@@ -46,14 +46,14 @@
         <% if (page <= 996 && page >= 4) { %>
             <% for( let index = page === 4 ? 1 : page - 4; index < page + 5; index++ ) { %>
                 <button class="<%= index === page ? 'active-button' : 'inactive-button' %>">
-                    <a href=<%= `/all/${index}` %> ><%= index %></a>
+                    <a href=<%= `/category/${cat}/${index}` %> ><%= index %></a>
                 </button>
             <% } %>
         
         <% } else if (page <= 4 && page > 0) { %>
             <% for( let index = 1; index < 10; index++ ) { %>
                 <button class="<%= index === page ? 'active-button' : 'inactive-button' %>">
-                <a href=<%= `/all/${index}` %> ><%= index %></a>
+                <a href=<%= `/category/${cat}/${index}` %> ><%= index %></a>
                 </button>
             <% } %>
          <% } %>

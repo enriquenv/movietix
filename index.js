@@ -73,6 +73,29 @@ app.get("/search", function (req, res) {
     // res.render("search.ejs", { search: req.query.search });
 });
 
+app.get("/category/:cat/:page", function (req, res) {
+    axios
+        .get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&with_genres=${req.params.cat}&page=${req.params.page}`
+        )
+        .then(function (response) {
+            // handle success
+            // console.log(response.data.results);
+            // console.log(response.data.results.length);
+            res.render("category.ejs", {
+                page: Number(req.params.page),
+                cat: Number(req.params.cat),
+                movies: response.data.results,
+            });
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        });
+
+    // console.log(req.params.page);
+});
+
 app.listen(3000, () => {
     console.log("listening at http://localhost:3000");
 });
