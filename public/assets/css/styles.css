@@ -41,6 +41,10 @@ h4 {
     width: 700px;
 }
 
+.movie-instance:hover {
+    background-color: #434242;
+}
+
 section {
     display: flex;
     flex-wrap: wrap;
@@ -63,4 +67,19 @@ button {
 
 .active-button {
     background-color: #37a45e;
+}
+
+#categories > a {
+    margin: 10px;
+    padding: 10px;
+    background-color: #1c1c1c;
+    border-radius: 15px;
+}
+
+#categories > a:hover {
+    background-color: #434242;
+}
+
+a:hover {
+    color: #37a45e;
 }

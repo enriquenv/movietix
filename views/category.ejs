@@ -5,7 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/assets/css/styles.css">
-        <title>MoviePit</title>
+        <title>MoviePit | <% if (cat === 28) { %>Action<% }
+                        else if (cat === 12) { %>Adventure<% }
+                        else if (cat === 80) { %>Crime<% }
+                        else if (cat === 35) { %>Comedy<% }
+                        else if (cat === 18) { %>Drama<% }
+                        else if (cat === 27) { %>Horror<% }
+                        else if (cat === 10402) { %>Music<% }
+                        else if (cat === 878) { %>Science Fiction<% }
+                        else { %>Category<% } %> movies</title>
     </head>
     <body>
         <header>
@@ -15,7 +23,7 @@
                 <input type="submit" value="Search" id="">
             </form>
 
-            <section>
+            <section id="categories">
                 <a href="/category/28/1">Action</a>
                 <a href="/category/12/1">Adventure</a>
                 <a href="/category/80/1">Crime</a>
