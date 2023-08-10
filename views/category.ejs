@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/assets/css/styles.css">
-        <title>MoviePit | <% if (cat === 28) { %>Action<% }
+        <link rel="icon" type="image/png" href="/assets/img/movie_icon.png">
+        <title>MovieTix | <% if (cat === 28) { %>Action<% }
                         else if (cat === 12) { %>Adventure<% }
                         else if (cat === 80) { %>Crime<% }
                         else if (cat === 35) { %>Comedy<% }
@@ -17,21 +18,22 @@
     </head>
     <body>
         <header>
-            <h1><a href="/"><span>M</span>ovie<span>P</span>it</a></h1>
+            <h1><a href="/"><span>M</span>ovie<span>T</span>ix</a></h1>
             <form action="/search" method="get">
                 <input type="text" name="search" id="">
                 <input type="submit" value="Search" id="">
             </form>
 
             <section id="categories">
-                <a href="/category/28/1">Action</a>
-                <a href="/category/12/1">Adventure</a>
-                <a href="/category/80/1">Crime</a>
-                <a href="/category/35/1">Comedy</a>
-                <a href="/category/18/1">Drama</a>
-                <a href="/category/27/1">Horror</a>
-                <a href="/category/10402/1">Music</a>
-                <a href="/category/878/1">Science Fiction</a>
+                <a href="/all/1">All</a>
+                <a href="/category/28/1" class="<%= cat === 28 ? 'active-cat' : 'inactive-cat' %>">Action</a>
+                <a href="/category/12/1" class="<%= cat === 12 ? 'active-cat' : 'inactive-cat' %>">Adventure</a>
+                <a href="/category/80/1" class="<%= cat === 80 ? 'active-cat' : 'inactive-cat' %>">Crime</a>
+                <a href="/category/35/1" class="<%= cat === 35 ? 'active-cat' : 'inactive-cat' %>">Comedy</a>
+                <a href="/category/18/1" class="<%= cat === 18 ? 'active-cat' : 'inactive-cat' %>">Drama</a>
+                <a href="/category/27/1" class="<%= cat === 27 ? 'active-cat' : 'inactive-cat' %>">Horror</a>
+                <a href="/category/10402/1" class="<%= cat === 10402 ? 'active-cat' : 'inactive-cat' %>">Music</a>
+                <a href="/category/878/1" class="<%= cat === 878 ? 'active-cat' : 'inactive-cat' %>">Science Fiction</a>
             </section>
         </header>
 

@@ -5,11 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/assets/css/styles.css" />
-        <title><%= detail.title %> | Moviepit</title>
+        <link rel="icon" type="image/png" href="/assets/img/movie_icon.png">
+        <title><%= detail.title %> | MovieTix</title>
+        <script src="https://kit.fontawesome.com/75e7f79942.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
-            <h1><a href="/"><span>M</span>ovie<span>P</span>it</a></h1>
+          <h1><a href="/"><span>M</span>ovie<span>T</span>ix</a></h1>
             <form action="/search" method="get">
                 <input type="text" name="search" id="" />
                 <input type="submit" value="Search" id="" />
@@ -38,9 +40,20 @@
         <h3>PLOT SUMMARY</h3>
         <p><%= detail.overview %></p>
 
-        <h4>Votes</h4>
-        <p><%= detail.vote_average %>/10</p>
-        <p><%= detail.vote_count %></p>
+        <h3>Votes</h3>
+        <% if (detail.vote_average >= 0 && detail.vote_average <= 2) { %>
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 2  && detail.vote_average <= 4) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 4  && detail.vote_average <= 6) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 6  && detail.vote_average <= 8) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 8  && detail.vote_average <= 10) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <% } %>
+        <p><%= detail.vote_average %>/10</p>    
+        <p>With <%= detail.vote_count %> votes</p>
         </article>
     </body>
 </html>
