@@ -41,15 +41,25 @@
         <p><%= detail.overview %></p>
 
         <h3>Votes</h3>
-        <% if (detail.vote_average >= 0 && detail.vote_average <= 2) { %>
+        <% if (detail.vote_average >= 0 && detail.vote_average <= 1.5) { %>
+          <i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 1.5  && detail.vote_average <= 2.25) { %>
             <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 2  && detail.vote_average <= 4) { %>
+          <% } else if (detail.vote_average > 2.25  && detail.vote_average <= 3.5) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 3.5  && detail.vote_average <= 4.25) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 4  && detail.vote_average <= 6) { %>
+          <% } else if (detail.vote_average > 4.25  && detail.vote_average <= 5.5) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 5.5  && detail.vote_average <= 6.25) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 6  && detail.vote_average <= 8) { %>
+          <% } else if (detail.vote_average > 6.25  && detail.vote_average <= 7.5) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+          <% } else if (detail.vote_average > 7.5  && detail.vote_average <= 8.25) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 8  && detail.vote_average <= 10) { %>
+          <% } else if (detail.vote_average > 8.25  && detail.vote_average <= 9.5) { %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+          <% } else if (detail.vote_average > 9.5  && detail.vote_average <= 10) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           <% } %>
         <p><%= detail.vote_average %>/10</p>    

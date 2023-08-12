@@ -98,6 +98,6 @@ a:hover {
     color: #37a45e;
 }
 
-.fa-star {
+.fa-star, .fa-star-half-alt {
     color: yellow;
 }
