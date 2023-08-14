@@ -46,7 +46,11 @@
             <% if (element.title != element.original_title) { %>
              <h4><a href=<%=`/detail/${element.id}`%>><%= `(${element.original_title})` %></a></h4>
             <% } %>
-            <p><%= element.overview %></p>
+            <% if (element.overview.length >= 110) { %>
+                <p><%= element.overview.slice(0, 110) %></p><a href=<%=`/detail/${element.id}`%> class="read-more">... Read more.</a></br>
+            <% } else {%>
+                <p><%= element.overview %></br></p>
+            <% } %>
             <a href=<%=`/detail/${element.id}`%>><img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>></a>
             </article>
         <% }) %>

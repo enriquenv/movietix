@@ -28,8 +28,19 @@ h2, #pagination, .movie-instance {
     text-align: center;
 }
 
+header {
+    position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+    background-color: #101010;
+}
+
+h3 {
+    margin: 5px 0;
+}
+
 h4 {
-    margin-top: -16px;
+    margin-top: -5px;
 }
 
 .movie-instance {
@@ -100,4 +111,23 @@ a:hover {
 
 .fa-star, .fa-star-half-alt {
     color: yellow;
+}
+
+.fa-bookmark {
+    color: #37a45e;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.fa-bookmark:hover {
+    transform: scale(1.25);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#favorites {
+    position: fixed;
+    top: 10px;
+    right: 20px;
 }
