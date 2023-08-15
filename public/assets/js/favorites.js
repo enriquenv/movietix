@@ -51,52 +51,6 @@ function toggleFavorite(iconElement) {
     }
 }
 
-/* // Populate list of favorite movies
-
-function updateFavoriteMovies() {
-    fetch('/favorite-movies')
-        .then(response => response.json())
-        .then(favoriteMovies => {
-            const favoritesPlaceholder = document.querySelector('#favorites-placeholder');
-            
-            favoriteMovies.forEach(movie => {
-                const movieElement = createMovieElement(movie);
-                favoritesPlaceholder.appendChild(movieElement);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching and updating favorite movies:', error);
-        });
-}
-
-function createMovieElement(movie) {
-    const article = document.createElement('article');
-    article.className = 'movie-instance';
-
-    const icon = document.createElement('i');
-    icon.className = 'far fa-bookmark';
-    icon.onclick = function () {
-        toggleFavorite(this);
-    };
-    icon.setAttribute('data-element-id', movie.id);
-    article.appendChild(icon);
-
-    const h3 = document.createElement('h3');
-    const a = document.createElement('a');
-    a.href = `/detail/${movie.id}`;
-    a.textContent = movie.title;
-    h3.appendChild(a);
-    article.appendChild(h3);
-
-    // Create and append other elements similarly...
-
-    return article;
-}
-
-// Call this function to update favorite movies when needed
-updateFavoriteMovies(); */
-
-
 // Populate favorite movies view
 function pushFavorites (){
     var movieIDs = JSON.parse(localStorage.getItem('favorites'));

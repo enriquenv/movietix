@@ -100,45 +100,6 @@ function getFavorites() {
     return JSON.parse(localStorage.getItem('favorites')) || [];
 }
 
-/* app.get("/favorites", function (req, res) {
-    axios
-        .get(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=${req.params.page}`
-        )
-        .then(function (response) {
-            // handle success
-            // console.log(response.data.results);
-            // console.log(response.data.results.length);
-            res.render("favorites.ejs", {
-                page: Number(req.params.page),
-                movies: response.data.results,
-            });
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        });
-}); */
-
-/* app.get('/favorite-movies', (req, res) => {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    const favoriteMovies = [];
-
-    const promises = favorites.map(async movieId => {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US`);
-        favoriteMovies.push(response.data);
-    });
-
-    Promise.all(promises)
-        .then(() => {
-            res.json(favoriteMovies);
-        })
-        .catch(error => {
-            console.error('Error fetching favorite movies:', error);
-            res.status(500).json({ error: 'Internal server error' });
-        });
-}); */
-
 app.get("/favorites", function (req, res) {
     axios
         .get(
