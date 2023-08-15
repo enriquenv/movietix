@@ -37,43 +37,18 @@
                 <a href="/category/10402/1">Music</a>
                 <a href="/category/878/1">Science Fiction</a>
             </section>
+            <script>
+                const ap = '<%= ap %>';
+                document.addEventListener("DOMContentLoaded", function () {
+                    pushFavorites();
+                });
+            </script>
         </header>
 
-        <h2>Page <%= page %></h2>
+        <h2>My Saved Movies</h2>
 
-        <section>
-        <% movies.forEach(element => { %>
-            <article class="movie-instance">
-            <i class="far fa-bookmark" onclick="toggleFavorite(this)" data-element-id="<%= element.id %>"></i>
-            <h3><a href=<%=`/detail/${element.id}`%>><%= element.title %></a></h3>
-            <% if (element.title != element.original_title) { %>
-             <h4><a href=<%=`/detail/${element.id}`%>><%= `(${element.original_title})` %></a></h4>
-            <% } %>
-            <% if (element.overview.length >= 110) { %>
-                <p><%= element.overview.slice(0, 110) %></p><a href=<%=`/detail/${element.id}`%> class="read-more">... Read more.</a></br>
-            <% } else {%>
-                <p><%= element.overview %></br></p>
-            <% } %>
-            <a href=<%=`/detail/${element.id}`%>><img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>></a>
-            </article>
-        <% }) %>
+        <section id="favorites-placeholder">
+            <!-- Placeholder for favorite movie instances -->
         </section>
-
-    <div id="pagination">
-        <% if (page <= 996 && page >= 4) { %>
-            <% for( let index = page === 4 ? 1 : page - 4; index < page + 5; index++ ) { %>
-                <button class="<%= index === page ? 'active-button' : 'inactive-button' %>">
-                    <a href=<%= `/all/${index}` %> ><%= index %></a>
-                </button>
-            <% } %>
-        
-        <% } else if (page <= 4 && page > 0) { %>
-            <% for( let index = 1; index < 10; index++ ) { %>
-                <button class="<%= index === page ? 'active-button' : 'inactive-button' %>">
-                <a href=<%= `/all/${index}` %> ><%= index %></a>
-                </button>
-            <% } %>
-         <% } %>
-    </div> 
 </body>
 </html>
