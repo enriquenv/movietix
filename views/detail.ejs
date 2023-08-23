@@ -11,8 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/assets/css/styles.css" />
         <link rel="icon" type="image/png" href="/assets/img/movie_icon.png">
-        <title><%= detail.title %> | MovieTix</title>
+        <title><%= data.detail.title %> | MovieTix</title>
         <script src="https://kit.fontawesome.com/75e7f79942.js" crossorigin="anonymous"></script>
+        <script src="/assets/js/favorites.js"></script>
     </head>
     <body>
         <header>
@@ -20,10 +21,10 @@
             <a href="/favorites">My Movies</a>
         </div>
           <h1><a href="/"><span>M</span>ovie<span>T</span>ix</a></h1>
-            <form action="/search" method="get">
-                <input type="text" name="search" id="" />
-                <input type="submit" value="Search" id="" />
-            </form>
+          <form action="/search/1" method="get">
+            <input type="text" name="search" id="search-bar" placeholder="Search movies...">
+            <button type="submit" id="submit-bttn"><i class="fa fa-search"></i></button>
+          </form>
 
             <section id="categories">
                 <a href="/category/28/1">Action</a>
@@ -37,41 +38,63 @@
             </section>
         </header>
         <article class="detail-instance">
-        <img class="detail-image" src=<%-`//image.tmdb.org/t/p/w1280/${detail.backdrop_path}`%>
-        alt=<%= detail.original_title %>>
-        <h2><%= detail.title %></h2>
-        <p><%= detail.release_date %></p>
-        Released <% detail.genres.forEach(element => { %>
+        <% if (data.detail.backdrop_path) { %>
+            <img class="detail-image" src=<%-`//image.tmdb.org/t/p/w1280/${data.detail.backdrop_path}`%> alt=<%= data.detail.original_title %>>
+        <% } else {%>
+            <% const randomPlaceholder = Math.floor(Math.random() * 2) + 1; %>
+            <img class="detail-image" src="/assets/img/placeholder<%= randomPlaceholder %>.jpg" alt=<%= data.detail.original_title %>>
+        <% } %>
+        
+        <h2><%= data.detail.title %></h2>
+        <i class="far fa-bookmark" onclick="toggleFavorite(this)" data-element-id="<%= data.detail.id %>"></i>
+        <p><%= data.detail.release_date %></p>
+        Released <% data.detail.genres.forEach(element => { %>
         <p><%= element.name %></p>
         <% }) %>
 
         <h3>PLOT SUMMARY</h3>
-        <p><%= detail.overview %></p>
+        <p><%= data.detail.overview %></p>
 
         <h3>Votes</h3>
-        <% if (detail.vote_average >= 0 && detail.vote_average <= 1.5) { %>
+        <% if (data.detail.vote_average >= 0 && data.detail.vote_average <= 1.5) { %>
           <i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 1.5  && detail.vote_average <= 2.25) { %>
+          <% } else if (data.detail.vote_average > 1.5  && data.detail.vote_average <= 2.25) { %>
             <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 2.25  && detail.vote_average <= 3.5) { %>
+          <% } else if (data.detail.vote_average > 2.25  && data.detail.vote_average <= 3.5) { %>
             <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 3.5  && detail.vote_average <= 4.25) { %>
+          <% } else if (data.detail.vote_average > 3.5  && data.detail.vote_average <= 4.25) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 4.25  && detail.vote_average <= 5.5) { %>
+          <% } else if (data.detail.vote_average > 4.25  && data.detail.vote_average <= 5.5) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 5.5  && detail.vote_average <= 6.25) { %>
+          <% } else if (data.detail.vote_average > 5.5  && data.detail.vote_average <= 6.25) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 6.25  && detail.vote_average <= 7.5) { %>
+          <% } else if (data.detail.vote_average > 6.25  && data.detail.vote_average <= 7.5) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 7.5  && detail.vote_average <= 8.25) { %>
+          <% } else if (data.detail.vote_average > 7.5  && data.detail.vote_average <= 8.25) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-          <% } else if (detail.vote_average > 8.25  && detail.vote_average <= 9.5) { %>
+          <% } else if (data.detail.vote_average > 8.25  && data.detail.vote_average <= 9.5) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-          <% } else if (detail.vote_average > 9.5  && detail.vote_average <= 10) { %>
+          <% } else if (data.detail.vote_average > 9.5  && data.detail.vote_average <= 10) { %>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           <% } %>
-        <p><%= detail.vote_average %>/10</p>    
-        <p>With <%= detail.vote_count %> votes</p>
+        <p><%= data.detail.vote_average %>/10</p>    
+        <p>With <%= data.detail.vote_count %> votes</p>
+        <h3>TRAILER</h3>
+            <div class="video-container">
+              <% let lastTrailerKey = null; %>
+              <% for (let i = data.videos.length - 1; i >= 0; i--) { %>
+                  <% if (data.videos[i].type === "Trailer") { %>
+                      <% lastTrailerKey = data.videos[i].key; %>
+                      <% break; %>
+                  <% } %>
+              <% } %>
+              
+              <% if (lastTrailerKey) { %>
+                <iframe src="https://www.youtube.com/embed/<%= lastTrailerKey %>" frameborder="0" allowfullscreen></iframe>
+              <% } else { %>
+                  <p>No trailer videos available.</p>
+              <% } %>
+          </div>
         </article>
     </body>
 </html>

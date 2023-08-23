@@ -35,7 +35,7 @@ app.get("/all/:page", function (req, res) {
     // console.log(req.params.page);
 });
 
-app.get("/detail/:id", function (req, res) {
+/* app.get("/detail/:id", function (req, res) {
     axios
         .get(
             `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.API_KEY}&language=en-US`
@@ -49,18 +49,57 @@ app.get("/detail/:id", function (req, res) {
         .catch(function (error) {
             console.log(error);
         });
-});
+}); */
 
-app.get("/search", function (req, res) {
+app.get("/detail/:id", function (req, res) {
     axios
         .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&page=1&query=${req.query.search}`
+            `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.API_KEY}&language=en-US`
+        )
+        .then(function (response) {
+            // First response data
+            const detail = response.data;
+            // Second GET request
+            axios
+                .get(
+                    `https://api.themoviedb.org/3/movie/${req.params.id}/videos?api_key=${process.env.API_KEY}&language=en-US`
+                )
+                .then(function (secondResponse) {
+                    // Second response data
+                    const videos = secondResponse.data;
+
+                    // Combining both response data
+                    const combinedData = {
+                        detail: detail,
+                        videos: videos.results,
+                    };
+
+                    res.render("detail.ejs", {
+                        data: combinedData,
+                    });
+                })
+                .catch(function (secondError) {
+                    console.log(secondError);
+                });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
+
+
+app.get("/search/:page", function (req, res) {
+    axios
+        .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&page=${req.params.page}&query=${req.query.search}`
         )
         .then(function (response) {
             res.render("search.ejs", {
                 search: req.query.search,
                 page: Number(req.params.page),
                 movies: response.data.results,
+                total_pages: response.data.total_pages,
+                total_results: response.data.total_results,
             });
             // console.log(response.data);
         })

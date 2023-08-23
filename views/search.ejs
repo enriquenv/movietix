@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="/assets/css/styles.css">
         <link rel="icon" type="image/png" href="/assets/img/movie_icon.png">
         <title>MovieTix | Search: <%= search %></title>
+        <script src="https://kit.fontawesome.com/75e7f79942.js" crossorigin="anonymous"></script>
+        <script src="/assets/js/favorites.js"></script>
     </head>
     <body>
         <header>
@@ -19,9 +21,9 @@
                 <a href="/favorites">My Movies</a>
             </div>
             <h1><a href="/"><span>M</span>ovie<span>T</span>ix</a></h1>
-            <form action="/search" method="get">
-                <input type="text" name="search" id="">
-                <input type="submit" value="Search" id="">
+            <form action="/search/1" method="get">
+                <input type="text" name="search" id="search-bar" placeholder="Search movies...">
+                <button type="submit" id="submit-bttn"><i class="fa fa-search"></i></button>
             </form>
 
             <section id="categories">
@@ -36,15 +38,45 @@
             </section>
         </header>
         <h2>Movie results for: <%= search %></h2>
+        <p id="search-results">(<%= total_pages %> pages with <%= total_results %> results)</p>
 
-
+        <section>
         <% movies.forEach(element => { %>
+            <article class="movie-instance">
+            <i class="far fa-bookmark" onclick="toggleFavorite(this)" data-element-id="<%= element.id %>"></i>
             <h3><a href=<%=`/detail/${element.id}`%>><%= element.title %></a></h3>
             <% if (element.title != element.original_title) { %>
              <h4><a href=<%=`/detail/${element.id}`%>><%= `(${element.original_title})` %></a></h4>
             <% } %>
-            <p><%= element.overview %></p>
-            <img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>>
+            <% if (element.overview.length >= 110) { %>
+                <p><%= element.overview.slice(0, 110) %></p><a href=<%=`/detail/${element.id}`%> class="read-more">... Read more.</a></br>
+            <% } else {%>
+                <p><%= element.overview %></br></p>
+            <% } %>
+            <% if (element.poster_path) { %>
+                <a href=<%=`/detail/${element.id}`%>><img src=<%-`//image.tmdb.org/t/p/w342/${element.poster_path}`%> alt=<%= element.original_title %>></a>
+            <% } else {%>
+                <% const randomPlaceholder = Math.floor(Math.random() * 2) + 1; %>
+                <a href=<%=`/detail/${element.id}`%>><img src="/assets/img/placeholder<%= randomPlaceholder %>.jpg" alt=<%= element.original_title %>></a>
+            <% } %>
+            </article>
         <% }) %>
+        </section>
+
+        <div id="pagination">
+            <% if (page <= 996 && page >= 4) { %>
+                <% for (let index = page === 4 ? 1 : page - 4; index <= Math.min(page + 4, total_pages); index++) { %>
+                    <button class="<%= index === page ? 'active-button' : 'inactive-button' %>">
+                        <a href="<%= `/search/${index}?search=${search}` %>"><%= index %></a>
+                    </button>
+                <% } %>
+            <% } else if (page <= 4 && page > 0) { %>
+                <% for (let index = 1; index <= Math.min(total_pages, 10); index++) { %>
+                    <button class="<%= index === page ? 'active-button' : 'inactive-button' %>">
+                        <a href="<%= `/search/${index}?search=${search}` %>"><%= index %></a>
+                    </button>
+                <% } %>
+            <% } %>
+        </div>
     </body>
 </html>
